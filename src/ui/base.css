@@ -1,0 +1,177 @@
+/* Общие стили для попапа и страницы настроек. */
+
+:root {
+  --bg: #121a24;
+  --bg-2: #17212e;
+  --card: #1b2838;
+  --card-2: #213045;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #e3e7ea;
+  --muted: #8f98a0;
+  --dim: #67707b;
+  --blue: #67c1f5;
+  --mint: #4ee39a;
+  --mint-2: #2fbf71;
+  --mint-ink: #06180e;
+  --sale-bg: #4c6b22;
+  --sale-text: #beee11;
+  --warn: #f2a33a;
+  --danger: #e05d5d;
+  --plati: #5aa9ff;
+  --ggsel: #a3e35d;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Атрибут hidden должен прятать элемент, даже если у него задан display в CSS. */
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Motiva Sans', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.icon-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.icon-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-btn.spin svg {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pct {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--sale-bg);
+  color: var(--sale-text);
+  font-weight: 700;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pct.worse {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--muted);
+}
+
+.src {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.src-plati {
+  color: var(--plati);
+  background: rgba(90, 169, 255, 0.13);
+}
+
+.src-ggsel {
+  color: var(--ggsel);
+  background: rgba(163, 227, 93, 0.12);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: filter 0.15s, background 0.15s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--mint), var(--mint-2));
+  color: var(--mint-ink);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.07);
+}
+
+.btn-secondary {
+  border-color: rgba(103, 193, 245, 0.4);
+  background: rgba(103, 193, 245, 0.08);
+  color: var(--blue);
+}
+
+.btn-secondary:hover {
+  background: rgba(103, 193, 245, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn.spin svg {
+    animation: none;
+  }
+}

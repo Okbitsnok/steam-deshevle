@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Дешевле — где купить игру из Steam выгоднее",
+  "short_name": "Дешевле",
+  "version": "1.0.0",
+  "description": "Показывает прямо на странице игры в Steam, где её можно купить дешевле: ключи, гифты и пополнение на Plati и GGSel. Следит за ценами на игры из списка желаемого.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Дешевле — выгодные цены на игры",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_page": "src/options/options.html",
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "alarms", "notifications"],
+  "host_permissions": [
+    "https://store.steampowered.com/*",
+    "https://plati.io/*",
+    "https://api.ggsel.com/*",
+    "https://www.cbr-xml-daily.ru/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://store.steampowered.com/app/*"],
+      "js": ["src/content/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://store.steampowered.com/*"],
+      "exclude_matches": [
+        "https://store.steampowered.com/login*",
+        "https://store.steampowered.com/join*",
+        "https://store.steampowered.com/account*",
+        "https://store.steampowered.com/checkout*"
+      ],
+      "js": ["src/content/wishlist-sync.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/content/panel.css", "icons/*"],
+      "matches": ["https://store.steampowered.com/*"]
+    }
+  ]
+}

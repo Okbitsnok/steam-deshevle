@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Detroit: Become Human в Steam</title>
+    <meta itemprop="priceCurrency" content="__CURRENCY__" />
+    <meta itemprop="price" content="__PRICE_TEXT__" />
+    <style>
+      /* Упрощённая копия раскладки страницы игры в Steam — только для автотеста */
+      body { margin: 0; background: #1b2838; color: #c6d4df; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+      .top { height: 104px; background: #171a21; }
+      .page_content { width: 940px; margin: 0 auto; padding-top: 24px; }
+      .apphub_AppName { font-size: 26px; color: #fff; margin: 0 0 18px; }
+      .cols { display: flex; gap: 16px; }
+      .leftcol { width: 616px; }
+      .rightcol { width: 308px; height: 420px; background: rgba(0,0,0,.2); }
+      .game_area_purchase_game { position: relative; padding: 16px 16px 26px; margin-bottom: 28px; border-radius: 4px;
+        background: linear-gradient(-60deg, rgba(226,244,255,.3) 5%, rgba(84,107,115,.3) 95%); }
+      .game_area_purchase_game h1 { font-size: 21px; color: #fff; margin: 0 0 10px; font-weight: normal; }
+      .game_purchase_action { position: absolute; right: 16px; bottom: -17px; display: flex; background: #000; padding: 2px; border-radius: 2px; }
+      .game_purchase_price { padding: 8px 12px; color: #fff; }
+      .btn_addtocart a { display: block; padding: 8px 15px; background: linear-gradient(to right, #75b022 5%, #588a1b 95%); color: #d2efa9; border-radius: 2px; text-decoration: none; }
+      .desc { height: 600px; background: rgba(0,0,0,.15); border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <div class="top"></div>
+    <div class="page_content">
+      <div id="appHubAppName" class="apphub_AppName">Detroit: Become Human</div>
+      <div class="cols">
+        <div class="leftcol game_description_column">
+          <div id="game_area_purchase" class="game_area_purchase">
+            <div class="game_area_purchase_game demo_above_purchase">
+              <h1>Загрузить Detroit: Become Human Demo</h1>
+            </div>
+            <div class="game_area_purchase_game_wrapper">
+              <div class="game_area_purchase_game" id="game_area_purchase_section_add_to_cart_423337">
+                <h1>Купить Detroit: Become Human</h1>
+                <div class="game_purchase_action">
+                  <div class="game_purchase_price price" data-price-final="__PRICE_CENTS__">__PRICE_TEXT__</div>
+                  <div class="btn_addtocart"><a href="#">В корзину</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="desc"></div>
+        </div>
+        <div class="rightcol"></div>
+      </div>
+    </div>
+  </body>
+</html>

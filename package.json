@@ -1,0 +1,17 @@
+{
+  "name": "steam-deshevle",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Chrome-расширение: где купить игру из Steam дешевле (Plati, GGSel)",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint src tests",
+    "test": "node tests/unit.mjs && node tests/e2e.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0",
+    "typescript": "^5.6.0",
+    "eslint": "^9.0.0"
+  }
+}

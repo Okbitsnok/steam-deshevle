@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Дешевле</title>
+    <link rel="stylesheet" href="../ui/base.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top">
+        <div class="brand">
+          <img class="logo" src="../../icons/icon48.png" alt="" width="28" height="28" />
+          <div>
+            <div class="name">Дешевле</div>
+            <div class="tagline">Цены на игры из твоего списка</div>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button id="refresh" class="icon-btn" type="button" title="Проверить цены сейчас" aria-label="Проверить цены сейчас">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4.5h-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="settings" class="icon-btn" type="button" title="Настройки" aria-label="Настройки">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 13.5a7.7 7.7 0 0 0 0-3l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.5A7.6 7.6 0 0 0 7 6.5l-2.4-1-2 3.4 2 1.6a7.7 7.7 0 0 0 0 3l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 2.6 1.5l.4 2.5h4l.4-2.5a7.6 7.6 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div id="progress" class="progress" hidden>
+        <div class="progress-bar"><span id="progress-fill"></span></div>
+        <div id="progress-text" class="progress-text"></div>
+      </div>
+
+      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+      <section id="summary" class="summary" hidden></section>
+
+      <nav class="filters" role="tablist" aria-label="Фильтр">
+        <button class="filter active" data-filter="all" type="button" role="tab" aria-selected="true">Все</button>
+        <button class="filter" data-filter="deals" type="button" role="tab" aria-selected="false">Выгодно</button>
+        <button class="filter" data-filter="tracked" type="button" role="tab" aria-selected="false">Отслеживаю</button>
+      </nav>
+
+      <main id="list" class="list" aria-live="polite"></main>
+
+      <footer class="bottom">
+        <span id="footer-text">Цены с Plati и GGSel</span>
+      </footer>
+    </div>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

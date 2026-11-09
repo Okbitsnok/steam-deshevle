@@ -1,0 +1,932 @@
+/* Стили панели «Дешевле». Файл подключается внутрь Shadow DOM,
+   поэтому стили Steam сюда не попадают, а наши — не ломают страницу. */
+
+:host {
+  all: initial;
+}
+
+.dz {
+  --bg: #16202d;
+  --bg-2: #1b2838;
+  --line: rgba(103, 193, 245, 0.14);
+  --line-2: rgba(255, 255, 255, 0.07);
+  --text: #dfe3e6;
+  --muted: #8f98a0;
+  --dim: #67707b;
+  --blue: #67c1f5;
+  --mint: #4ee39a;
+  --mint-2: #2fbf71;
+  --mint-ink: #06180e;
+  --sale-bg: #4c6b22;
+  --sale-text: #beee11;
+  --warn: #f2a33a;
+  --plati: #5aa9ff;
+  --ggsel: #a3e35d;
+
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(78, 227, 154, 0.11) 0%, rgba(78, 227, 154, 0) 45%),
+    linear-gradient(180deg, rgba(27, 40, 56, 0.96), rgba(18, 26, 36, 0.96));
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.dz::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--mint), var(--mint-2) 60%, rgba(47, 191, 113, 0));
+}
+
+.dz *,
+.dz *::before,
+.dz *::after {
+  box-sizing: border-box;
+}
+
+.dz a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dz button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ic {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.ic svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Шапка ---------- */
+
+.dz-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px 10px 18px;
+}
+
+.dz-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  text-align: left;
+}
+
+.dz-logo {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  padding: 4px;
+  border-radius: 7px;
+  color: var(--mint-ink);
+  background: linear-gradient(135deg, var(--mint), var(--mint-2));
+  box-shadow: 0 0 0 1px rgba(78, 227, 154, 0.35), 0 4px 14px rgba(47, 191, 113, 0.35);
+}
+
+.dz-logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dz-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #fff;
+}
+
+.dz-sub {
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dz-head-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.dz-head-summary b {
+  color: var(--mint);
+  font-size: 14px;
+}
+
+.dz-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-icon:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.btn-icon:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-icon:focus-visible,
+.tab:focus-visible,
+.btn-buy:focus-visible,
+.row:focus-visible,
+.btn-ghost:focus-visible,
+.btn-more:focus-visible,
+.watch:focus-visible,
+.dz-brand:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.btn-icon .ic {
+  width: 17px;
+  height: 17px;
+}
+
+.btn-icon.spin .ic {
+  animation: dz-spin 0.9s linear infinite;
+}
+
+.chev .ic {
+  transition: transform 0.2s;
+}
+
+.chev.up .ic {
+  transform: rotate(-90deg);
+}
+
+@keyframes dz-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.is-collapsed .dz-head {
+  padding-bottom: 12px;
+}
+
+/* ---------- Лучшая цена ---------- */
+
+.dz-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 12px 0 18px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--line-2);
+}
+
+.hero-main {
+  min-width: 0;
+}
+
+.hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-price-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 4px;
+}
+
+.hero-price {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--mint);
+  text-shadow: 0 0 22px rgba(78, 227, 154, 0.28);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-steam {
+  color: var(--muted);
+}
+
+.hero-steam s {
+  color: var(--dim);
+}
+
+.hero-steam b {
+  color: var(--text);
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hero-save {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hero-save b {
+  color: var(--sale-text);
+}
+
+.hero-empty {
+  margin-top: 4px;
+  color: var(--text);
+}
+
+.dz-hero.muted .hero-steam {
+  margin-top: 6px;
+}
+
+.pct {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: var(--sale-bg);
+  color: var(--sale-text);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+.pct.sm {
+  padding: 1px 5px;
+  font-size: 11.5px;
+}
+
+.pct.worse {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--muted);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.chip.sm {
+  padding: 0 6px;
+  font-size: 11px;
+}
+
+.chip.kind-key {
+  border-color: rgba(103, 193, 245, 0.45);
+  color: var(--blue);
+}
+
+.chip.kind-gift {
+  border-color: rgba(78, 227, 154, 0.45);
+  color: var(--mint);
+}
+
+.src {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.src-plati {
+  color: var(--plati);
+  background: rgba(90, 169, 255, 0.13);
+}
+
+.src-ggsel {
+  color: var(--ggsel);
+  background: rgba(163, 227, 93, 0.12);
+}
+
+.seller {
+  color: var(--text);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ic.star {
+  width: 12px;
+  height: 12px;
+  color: #ffc84a;
+}
+
+.btn-buy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  padding: 11px 16px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--mint), var(--mint-2));
+  color: var(--mint-ink) !important;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(47, 191, 113, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+
+.btn-buy:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 10px 24px rgba(47, 191, 113, 0.4);
+}
+
+.btn-buy .ic {
+  width: 17px;
+  height: 17px;
+}
+
+/* ---------- Вкладки ---------- */
+
+.dz-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 6px;
+  margin: 12px 12px 0 18px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.025);
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.tab.active {
+  border-color: rgba(78, 227, 154, 0.55);
+  background: rgba(78, 227, 154, 0.08);
+  box-shadow: inset 0 -2px 0 var(--mint);
+}
+
+.tab.risky.active {
+  border-color: rgba(242, 163, 58, 0.55);
+  background: rgba(242, 163, 58, 0.07);
+  box-shadow: inset 0 -2px 0 var(--warn);
+}
+
+.tab-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tab-ic {
+  width: 14px;
+  height: 14px;
+  color: var(--muted);
+}
+
+.tab-count {
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.tab-from {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tab.active .tab-from {
+  color: var(--mint);
+}
+
+.tab.risky.active .tab-from {
+  color: var(--warn);
+}
+
+.tab.risky .tab-ic {
+  color: var(--warn);
+}
+
+.tab.risky .tab-from {
+  color: rgba(242, 163, 58, 0.75);
+}
+
+/* ---------- Список ---------- */
+
+.dz-body {
+  margin: 10px 12px 0 18px;
+}
+
+.dz-hint {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(103, 193, 245, 0.06);
+}
+
+.dz-hint .ic {
+  margin-top: 1px;
+  color: var(--blue);
+}
+
+.dz-hint.risk-low .ic {
+  color: var(--mint);
+}
+
+.dz-hint.risk-high {
+  background: rgba(242, 163, 58, 0.08);
+  color: #e7c9a0;
+}
+
+.dz-hint.risk-high .ic {
+  color: var(--warn);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto 16px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px;
+  border-radius: 6px;
+  border-bottom: 1px solid var(--line-2);
+  transition: background 0.12s;
+}
+
+.row:last-child {
+  border-bottom-color: transparent;
+}
+
+.row:hover {
+  background: rgba(103, 193, 245, 0.07);
+}
+
+.row .src {
+  width: 100%;
+}
+
+.row-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.row-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+
+.row:hover .row-title {
+  color: #fff;
+}
+
+.row-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--muted);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.row-meta .seller {
+  color: var(--muted);
+  max-width: 130px;
+}
+
+.row-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.row-price b {
+  font-size: 14px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.row-go {
+  width: 14px;
+  height: 14px;
+  color: var(--dim);
+}
+
+.row:hover .row-go {
+  color: var(--blue);
+}
+
+.row.untrusted .row-title,
+.row.untrusted .row-price b {
+  color: var(--muted);
+}
+
+.flag {
+  padding: 0 5px;
+  border-radius: 3px;
+  background: rgba(242, 163, 58, 0.12);
+  color: var(--warn);
+  font-size: 10.5px;
+}
+
+.btn-more {
+  width: 100%;
+  margin-top: 4px;
+  padding: 7px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--blue);
+  font-size: 12px;
+}
+
+.btn-more:hover {
+  background: rgba(103, 193, 245, 0.07);
+}
+
+.dz-none {
+  padding: 16px 8px;
+  color: var(--muted);
+}
+
+/* ---------- Пополнение ---------- */
+
+.topup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line-2);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.topup-calc {
+  flex: 1;
+  max-width: 320px;
+}
+
+.tc-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 3px 0;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tc-row b {
+  color: var(--text);
+}
+
+.tc-row.total {
+  margin-top: 4px;
+  padding-top: 7px;
+  border-top: 1px solid var(--line-2);
+  color: var(--text);
+}
+
+.tc-row.total b {
+  color: var(--mint);
+  font-size: 16px;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(103, 193, 245, 0.4);
+  background: rgba(103, 193, 245, 0.08);
+  color: var(--blue) !important;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  background: rgba(103, 193, 245, 0.16);
+}
+
+.btn-ghost .ic {
+  width: 14px;
+  height: 14px;
+}
+
+.dz-foot-note {
+  margin: 8px 2px 0;
+  font-size: 11.5px;
+  color: var(--dim);
+}
+
+/* ---------- Сообщения ---------- */
+
+.dz-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 12px 0 18px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--line-2);
+}
+
+.dz-msg > .ic {
+  width: 20px;
+  height: 20px;
+  color: var(--warn);
+}
+
+.dz-msg > div {
+  flex: 1;
+}
+
+.dz-msg p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--blue) !important;
+}
+
+.link .ic {
+  width: 13px;
+  height: 13px;
+}
+
+/* ---------- Низ ---------- */
+
+.dz-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 12px 0 0;
+  padding: 9px 12px 10px 18px;
+  border-top: 1px solid var(--line-2);
+  background: rgba(0, 0, 0, 0.14);
+  font-size: 11.5px;
+  color: var(--dim);
+}
+
+.sources {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.source {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted) !important;
+}
+
+.source:hover {
+  color: #fff !important;
+}
+
+.source .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 6px var(--mint);
+}
+
+.source.fail .dot {
+  background: #e05d5d;
+  box-shadow: 0 0 6px #e05d5d;
+}
+
+.source .cnt {
+  color: var(--dim);
+}
+
+.watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.watch .ic {
+  width: 14px;
+  height: 14px;
+}
+
+.watch:hover:not(.static) {
+  border-color: rgba(78, 227, 154, 0.6);
+}
+
+.watch.on {
+  border-color: rgba(78, 227, 154, 0.5);
+  background: rgba(78, 227, 154, 0.1);
+  color: var(--mint);
+}
+
+.watch.static {
+  cursor: default;
+}
+
+/* ---------- Скелетон загрузки ---------- */
+
+.dz-skel {
+  margin: 0 12px 14px 18px;
+}
+
+.sk {
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.09) 40%, rgba(255, 255, 255, 0.04) 80%);
+  background-size: 200% 100%;
+  animation: dz-shimmer 1.3s ease-in-out infinite;
+}
+
+.sk-a {
+  height: 86px;
+}
+
+.sk-b {
+  display: none;
+}
+
+.sk-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.sk-c {
+  height: 46px;
+}
+
+.sk-d {
+  height: 40px;
+  margin-top: 8px;
+}
+
+.sk-note {
+  margin: 10px 2px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@keyframes dz-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk,
+  .btn-icon.spin .ic {
+    animation: none;
+  }
+  .btn-buy:hover {
+    transform: none;
+  }
+}
+
+/* Узкие экраны (мобильная вёрстка Steam) */
+@media (max-width: 640px) {
+  .dz-hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-buy {
+    justify-content: center;
+  }
+  .row {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+  }
+  .row-go {
+    display: none;
+  }
+  .topup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

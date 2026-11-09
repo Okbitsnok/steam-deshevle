@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Дешевле — настройки</title>
+    <link rel="stylesheet" href="../ui/base.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <img src="../../icons/icon128.png" alt="" width="56" height="56" class="hero-logo" />
+        <div>
+          <h1>Дешевле</h1>
+          <p>Показывает на странице игры в Steam, где её можно купить выгоднее, и следит за ценами на игры, которые тебе интересны.</p>
+        </div>
+      </header>
+
+      <section id="welcome" class="welcome" hidden>
+        <h2>Готово, расширение установлено 🎉</h2>
+        <ol>
+          <li>
+            Открой любую игру в <a href="https://store.steampowered.com/app/1222140/" target="_blank">магазине Steam</a>. Рядом с кнопкой
+            «В корзину» появится панель с ценами. Входить в аккаунт не нужно.
+          </li>
+          <li>Хочешь дождаться скидки? Нажми «Следить за ценой» на странице игры, и придёт уведомление, когда она подешевеет.</li>
+          <li>Закрепи иконку расширения (значок пазла справа от адресной строки). По клику на неё видно все игры и выгоду.</li>
+        </ol>
+      </section>
+
+      <section class="card privacy">
+        <h2>
+          <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Безопасность и данные
+        </h2>
+        <ul>
+          <li><b>Входить в Steam не нужно.</b> Панель с ценами работает и без аккаунта.</li>
+          <li>
+            Если ты уже вошёл в Steam в этом браузере, расширение берёт только <b>номера игр из списка желаемого</b>, чтобы следить за их ценами.
+            Пароль, почту и платёжные данные оно не читает и никуда не отправляет.
+          </li>
+          <li>
+            <b>Своего сервера нет.</b> Настройки и список игр хранятся только в твоём браузере. Запросы идут в Steam (данные об игре), Plati и GGSel
+            (цены) и ЦБ РФ (курсы валют).
+          </li>
+          <li><b>Расширение ничего не покупает.</b> Покупка всегда происходит на сайте площадки, куда ты переходишь сам.</li>
+        </ul>
+      </section>
+
+      <form id="form" class="cards" autocomplete="off">
+        <section class="card">
+          <h2>Где искать</h2>
+          <label class="toggle">
+            <input type="checkbox" name="sources.plati" />
+            <span class="sw"></span>
+            <span class="tx"><b>Plati.Market</b><small>Крупная площадка цифровых товаров</small></span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" name="sources.ggsel" />
+            <span class="sw"></span>
+            <span class="tx"><b>GGSel</b><small>Маркетплейс игр, ключей и пополнений</small></span>
+          </label>
+          <p class="help">Расширение только смотрит цены на этих сайтах. Аккаунт на них не нужен.</p>
+        </section>
+
+        <section class="card">
+          <h2>Что показывать</h2>
+          <label class="toggle">
+            <input type="checkbox" name="showKeys" />
+            <span class="sw"></span>
+            <span class="tx">
+              <b
+                >Ключи Steam
+                <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                  >?<span class="tip-bubble"
+                    >Ключ — это код, который вводишь в Steam: «Игры» → «Активировать в Steam». Игра навсегда остаётся на твоём аккаунте. Смотри
+                    регион ключа: «РФ+СНГ» подходит аккаунтам из России и СНГ.</span
+                  ></span
+                ></b
+              >
+              <small>Код активации, игра навсегда на твоём аккаунте</small>
+            </span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" name="showGifts" />
+            <span class="sw"></span>
+            <span class="tx">
+              <b
+                >Гифты
+                <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                  >?<span class="tip-bubble"
+                    >Продавец покупает игру в Steam и отправляет её тебе подарком. Обычно нужно дать ссылку на профиль или добавить продавца в
+                    друзья. Игра тоже навсегда твоя, просто обычно дороже ключа.</span
+                  ></span
+                ></b
+              >
+              <small>Продавец дарит игру на твой аккаунт</small>
+            </span>
+          </label>
+          <label class="toggle risky">
+            <input type="checkbox" name="showAccounts" />
+            <span class="sw"></span>
+            <span class="tx">
+              <b
+                >Общие и офлайн-аккаунты
+                <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                  >?<span class="tip-bubble"
+                    >Тебе дают логин и пароль от чужого аккаунта, где уже куплена игра, и ты играешь в офлайн-режиме. Это самый дешёвый вариант,
+                    но он нарушает правила Steam: доступ могут отнять в любой момент, а такие аккаунты бывают крадеными. Поэтому они никогда не
+                    становятся «лучшей ценой».</span
+                  ></span
+                ></b
+              >
+              <small>Самые дешёвые, но рискованные: это чужие аккаунты, доступ могут отнять</small>
+            </span>
+          </label>
+          <div class="field">
+            <label for="currencyMode"
+              >Валюта
+              <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                >?<span class="tip-bubble"
+                  >«Как в Steam» — цены в той же валюте, что и в магазине Steam (рубли, тенге, евро…). Если это не рубли, доллары или евро, пересчитываем
+                  по курсу ЦБ.</span
+                ></span
+              ></label
+            >
+            <select id="currencyMode" name="currencyMode">
+              <option value="auto">Как в Steam</option>
+              <option value="RUB">Всегда рубли</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Надёжность продавца</h2>
+          <div class="field">
+            <label for="minSold"
+              >Проверенный продавец — от скольких продаж у лота
+              <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                >?<span class="tip-bubble"
+                  >Чем больше продаж, тем надёжнее продавец, но тем меньше выбор. «Лучшая цена» выбирается только среди проверенных. Остальные лоты
+                  тоже видны, но с пометкой «мало продаж».</span
+                ></span
+              ></label
+            >
+            <div class="range">
+              <input type="range" id="minSold" name="minSold" min="0" max="500" step="10" />
+              <output id="minSold-out"></output>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Пополнение кошелька</h2>
+          <p class="help lead">
+            Вкладка «Пополнение» на панели показывает, сколько выйдет купить игру в самом Steam, если пополнить кошелёк через сервис: ты платишь
+            сервису, он кладёт деньги на твой Steam, а игру покупаешь как обычно.
+          </p>
+          <div class="grid2">
+            <div class="field">
+              <label for="topupCommissionPct"
+                >Комиссия сервиса, %
+                <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                  >?<span class="tip-bubble"
+                    >Сервисы пополнения берут процент сверху. Мы прибавляем его к цене в Steam, чтобы ты видел итоговую сумму. Посмотри комиссию у
+                    сервиса, которым пользуешься, и впиши сюда. Обычно от 0 до 15%.</span
+                  ></span
+                ></label
+              >
+              <input type="number" id="topupCommissionPct" name="topupCommissionPct" min="0" max="50" step="0.5" />
+            </div>
+            <div class="field">
+              <label for="topupProvider"
+                >Где искать пополнение
+                <span class="tip tip-left" tabindex="0" role="note" aria-label="Подсказка"
+                  >?<span class="tip-bubble"
+                    >Куда ведёт кнопка «Найти пополнение» на вкладке «Пополнение». Можно выбрать площадку или вставить ссылку на свой любимый
+                    сервис.</span
+                  ></span
+                ></label
+              >
+              <select id="topupProvider" name="topupProvider">
+                <option value="ggsel">Поиск на GGSel</option>
+                <option value="plati">Поиск на Plati</option>
+                <option value="custom">Своя ссылка…</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" id="topupUrl-field" hidden>
+            <label for="topupUrl">Ссылка на сервис пополнения</label>
+            <input type="url" id="topupUrl" name="topupUrl" placeholder="https://…" />
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Уведомления о снижении цены</h2>
+          <label class="toggle">
+            <input type="checkbox" name="notifications" />
+            <span class="sw"></span>
+            <span class="tx"
+              ><b>Присылать уведомления</b
+              ><small>Расширение само проверяет цены на игры, за которыми ты следишь, и на игры из списка желаемого Steam</small></span
+            >
+          </label>
+          <div class="grid2">
+            <div class="field">
+              <label for="checkIntervalHours">Проверять каждые</label>
+              <select id="checkIntervalHours" name="checkIntervalHours">
+                <option value="3">3 часа</option>
+                <option value="6">6 часов</option>
+                <option value="12">12 часов</option>
+                <option value="24">24 часа</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="dropThresholdPct"
+                >Сообщать, если цена упала на
+                <span class="tip tip-left" tabindex="0" role="note" aria-label="Подсказка"
+                  >?<span class="tip-bubble"
+                    >Например, при 10%: лучшая цена была 1 000 ₽, уведомление придёт, когда она станет 900 ₽ или ниже.</span
+                  ></span
+                ></label
+              >
+              <select id="dropThresholdPct" name="dropThresholdPct">
+                <option value="5">5% и больше</option>
+                <option value="10">10% и больше</option>
+                <option value="20">20% и больше</option>
+                <option value="30">30% и больше</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <details class="card advanced">
+          <summary><h2>Для продвинутых</h2></summary>
+          <p class="help lead">Эти настройки можно не трогать, всё работает и так.</p>
+          <div class="field">
+            <label for="cacheMinutes"
+              >Сколько минут помнить найденные цены
+              <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                >?<span class="tip-bubble"
+                  >Чтобы не искать заново каждый раз, когда открываешь страницу игры. Кнопка ↻ на панели всегда ищет заново.</span
+                ></span
+              ></label
+            >
+            <input type="number" id="cacheMinutes" name="cacheMinutes" min="1" max="1440" />
+          </div>
+          <div class="field">
+            <label for="affiliate.plati"
+              >Партнёрская ссылка Plati
+              <span class="tip" tabindex="0" role="note" aria-label="Подсказка"
+                >?<span class="tip-bubble"
+                  >Площадки платят процент тем, кто приводит покупателей. Если ты вступил в партнёрскую программу, впиши сюда шаблон ссылки из
+                  кабинета: {id} заменится на номер лота, {url} — на ссылку на лот. Пусто — обычные ссылки.</span
+                ></span
+              ></label
+            >
+            <input type="text" id="affiliate.plati" name="affiliate.plati" placeholder="например https://plati.market/itm/{id}?ai=123456" />
+          </div>
+          <div class="field">
+            <label for="affiliate.ggsel">Партнёрская ссылка GGSel</label>
+            <input type="text" id="affiliate.ggsel" name="affiliate.ggsel" placeholder="например {url}?ref=ТВОЙ_КОД" />
+          </div>
+          <button type="button" id="clear-cache" class="btn btn-secondary">Очистить сохранённые цены</button>
+        </details>
+      </form>
+
+      <footer class="foot">
+        <span>Расширение не связано с Valve, Plati или GGSel. Цены берутся из открытых данных площадок.</span>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
