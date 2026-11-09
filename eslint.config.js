@@ -52,11 +52,11 @@ export default [
     languageOptions: { sourceType: 'script' },
   },
   {
-    files: ['tests/**/*.mjs'],
+    files: ['tests/**/*.mjs', 'scripts/**/*.mjs'],
     languageOptions: {
       ecmaVersion: 2023,
       sourceType: 'module',
-      globals: { ...browserGlobals, process: 'readonly', __dirname: 'readonly' },
+      globals: { ...browserGlobals, process: 'readonly', __dirname: 'readonly', Buffer: 'readonly' },
     },
     rules,
   },

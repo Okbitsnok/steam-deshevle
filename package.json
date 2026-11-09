@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Chrome-расширение: где купить игру из Steam дешевле (Plati, GGSel)",
+  "description": "Расширение для браузера: где купить игру из Steam дешевле (Plati, GGSel)",
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",
-    "lint": "eslint src tests",
-    "test": "node tests/unit.mjs && node tests/e2e.mjs"
+    "lint": "eslint src tests scripts",
+    "test": "node tests/unit.mjs && node tests/e2e.mjs",
+    "build": "node scripts/build-zip.mjs"
   },
   "devDependencies": {
     "playwright": "^1.49.0",
     "typescript": "^5.6.0",
     "eslint": "^9.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Okbitsnok/steam-deshevle.git"
   }
 }
